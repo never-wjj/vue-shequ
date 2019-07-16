@@ -4,50 +4,50 @@
       <li>
         <router-link
           @click.native="total = 856"
-          :class=" $route.fullPath === '/' || $route.fullPath==='/?tab=all' ? 'active' : ''"
-          to="/?tab=all"
+          :class=" $route.fullPath === $public+'/' || $route.fullPath===$public+'/?tab=all' ? 'active' : ''"
+          :to="$public+'/?tab=all'"
         >全部</router-link>
       </li>
       <li>
         <router-link
           @click.native="total = 15"
-          :class="$route.fullPath==='/?tab=good' ? 'active' : ''"
-          to="/?tab=good"
+          :class="$route.fullPath===$public+'/?tab=good' ? 'active' : ''"
+          :to="$public+'/?tab=good'"
         >精华</router-link>
       </li>
       <li>
         <router-link
           @click.native="total = 3"
-          :class="$route.fullPath==='/?tab=weex' ? 'active' : ''"
-          to="/?tab=weex"
+          :class="$route.fullPath===$public+'/?tab=weex' ? 'active' : ''"
+          :to="$public+'/?tab=weex'"
         >weex</router-link>
       </li>
       <li>
         <router-link
           @click.native="total = 247"
-          :class="$route.fullPath==='/?tab=share' ? 'active' : ''"
-          to="/?tab=share"
+          :class="$route.fullPath===$public+'/?tab=share' ? 'active' : ''"
+          :to="$public+'/?tab=share'"
         >分享</router-link>
       </li>
       <li>
         <router-link
           @click.native="total = 577"
-          :class="$route.fullPath==='/?tab=ask' ? 'active' : ''"
-          to="/?tab=ask"
+          :class="$route.fullPath===$public+'/?tab=ask' ? 'active' : ''"
+          :to="$public+'/?tab=ask'"
         >问答</router-link>
       </li>
       <li>
         <router-link
           @click.native="total = 30"
-          :class="$route.fullPath==='/?tab=job' ? 'active' : ''"
-          to="/?tab=job"
+          :class="$route.fullPath===$public+'/?tab=job' ? 'active' : ''"
+          :to="$public+'/?tab=job'"
         >招聘</router-link>
       </li>
     </ul>
     <div>
       <ul v-if="topics.length" class="content">
         <li v-for="topic in topics" :key="topic.id">
-          <router-link :to="`/user/${topic.author.loginname}`">
+          <router-link :to="$public+`/user/${topic.author.loginname}`">
             <img
               :src="topic.author.avatar_url"
               alt
@@ -60,12 +60,12 @@
             <span>{{topic.visit_count}}</span>
           </div>
           <span
-            v-if="$route.fullPath === '/' || $route.fullPath==='/?tab=all'||topic.top||topic.good"
+            v-if="$route.fullPath === $public+'/' || $route.fullPath===$public+'/?tab=all'||topic.top||topic.good"
             class="bth"
             :class="{tab:true,active:topic.top||topic.good}"
           >{{topic.top?'置顶':topic.good?'精华':topic.tab==='share'?'分享':topic.tab==='ask'?'问答':topic.tab==='job'?'招聘':'weex'}}</span>
           <span class="title">
-            <router-link :to="`/topics/${topic.id}`">{{topic.title}}</router-link>
+            <router-link :to="$public+`/topics/${topic.id}`">{{topic.title}}</router-link>
           </span>
           <span class="time">{{myMoment(topic.last_reply_at)}}</span>
         </li>
@@ -101,6 +101,8 @@ export default {
     "$route.fullPath": {
       immediate: true,
       handler() {
+        console.log(this.$public);
+        
         const tab = this.$route.query.tab || "all";
         const num = this.$route.query.page || "1";
         this.topics = [];

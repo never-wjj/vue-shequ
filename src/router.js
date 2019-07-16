@@ -7,6 +7,7 @@ import User from "./components/User.vue";
 import Creat from "./components/Creat.vue";
 import Foot from "./components/Foot.vue";
 import Message from "./components/Message.vue";
+import { Public } from "./proto";
 
 //给vue项目安装路由
 Vue.use(VueRouter);
@@ -15,30 +16,30 @@ Vue.use(VueRouter);
 const routes = [
   {
     component: Home,
-    path: "/"
+    path: Public + "/"
     //子路由下的pash开头不能加斜杠/ 默认开始就是父路由的Pash
   },
   // 文章展示路由  有很多页 有一个组件就够了  只是里边的内容不一样
   //:加上：就是动态页面
   {
     component: Creat,
-    path: "/topics/creat"
+    path: Public + "/topics/creat"
   },
   {
     component: Topics,
-    path: "/topics/:id"
+    path: Public + "/topics/:id"
   },
   {
     component: User,
-    path: "/user/:loginname"
+    path: Public + "/user/:loginname"
   },
   {
     component: Foot,
-    path: "/foot"
+    path: Public + "/foot"
   },
   {
     component: Message,
-    path: "/my/messages"
+    path: Public + "/my/messages"
   }
 ];
 //new:新创建  一个路由

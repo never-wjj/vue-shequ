@@ -1,16 +1,16 @@
 <template>
   <div class="hea">
     <div class="hea-inner">
-      <router-link to="/" class="df-vue">
+      <router-link :to="$public+'/'" class="df-vue">
         <img src="https://www.vue-js.com/public/images/vue.png" alt />
         <span>Vue.js</span>
       </router-link>
       <p class="creat">首页</p>
-      <router-link to="/topics/creat" v-if="userInfo">
+      <router-link :to="$public+'/topics/creat'" v-if="userInfo">
         <div class="age">发布评论</div>
       </router-link>
       <p class="creat">微信公众号</p>
-      <router-link to="/my/messages" v-if="userInfo">
+      <router-link :to="$public+'/my/messages'" v-if="userInfo">
         <div class="age">未读消息</div>
       </router-link>
       <p class="creat">VUE2.0</p>

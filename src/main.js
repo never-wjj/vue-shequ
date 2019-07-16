@@ -3,8 +3,10 @@ import Vue from "vue";
 import App from "./App.vue";
 import "./assets/glocal.css";
 import router from "./router";
+import { Public } from "./proto";
 
 import { Pagination, Button } from "element-ui";
+Vue.prototype.$public = Public;
 
 // Vue.use(ElementUI);
 Vue.config.productionTip = false;

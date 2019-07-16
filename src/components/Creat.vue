@@ -1,6 +1,6 @@
 <template>
   <div class="cat">
-    <router-link to="/">
+    <router-link :to="$public+'/'">
       <p class="cat-p">
         主页/
         <span>发布话题</span>

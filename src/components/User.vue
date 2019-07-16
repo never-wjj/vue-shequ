@@ -2,7 +2,7 @@
   <div v-if="user" class="user">
     <div class="user-inner">
       <div class="user-hea">
-        <router-link to="/">
+        <router-link :to="$public+'/'">
           <h3>主页/</h3>
         </router-link>
 
@@ -16,7 +16,7 @@
         <h3>最近创建的话题</h3>
         <ul v-if="user.recent_topics.length" class="content">
           <li v-for="topic in user.recent_topics" :key="topic.id">
-            <router-link :to="`/user/${topic.author.loginname}`">
+            <router-link :to="$public+`/user/${topic.author.loginname}`">
               <img
                 :src="topic.author.avatar_url"
                 alt
@@ -24,7 +24,7 @@
               />
             </router-link>
             <span class="title">
-              <router-link :to="`/topics/${topic.id}`">{{topic.title}}</router-link>
+              <router-link :to="$public+`/topics/${topic.id}`">{{topic.title}}</router-link>
             </span>
             <span class="time"></span>
           </li>
@@ -35,7 +35,7 @@
         <h3>最近参与的话题</h3>
         <ul v-if="user.recent_replies.length" class="content">
           <li v-for="topic in user.recent_replies" :key="topic.id">
-            <router-link :to="`/user/${topic.author.loginname}`">
+            <router-link :to="$public+`/user/${topic.author.loginname}`">
               <img
                 :src="topic.author.avatar_url"
                 alt
@@ -43,7 +43,7 @@
               />
             </router-link>
             <span class="title">
-              <router-link :to="`/topics/${topic.id}`">{{topic.title}}</router-link>
+              <router-link :to="$public+`/topics/${topic.id}`">{{topic.title}}</router-link>
             </span>
             <span class="time">{{myMoment(topic.last_reply_at)}}</span>
           </li>
