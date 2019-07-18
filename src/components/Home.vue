@@ -102,7 +102,7 @@ export default {
       immediate: true,
       handler() {
         console.log(this.$public);
-        
+
         const tab = this.$route.query.tab || "all";
         const num = this.$route.query.page || "1";
         this.topics = [];
@@ -125,7 +125,7 @@ export default {
       // 页面改变触发的函数
       // 更改页面的地址 从而触发 watch 的 handler 从而实现页面数据的变化
       const tab = this.$route.query.tab || "all";
-      this.$router.push(`/?tab=${tab}&page=${num}`);
+      this.$router.push(`${this.$public}/?tab=${tab}&page=${num}`);
     }
   }
 };
