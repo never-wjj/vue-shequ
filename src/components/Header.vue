@@ -11,7 +11,10 @@
       </router-link>
       <p class="creat">微信公众号</p>
       <router-link :to="$public+'/my/messages'" v-if="userInfo">
-        <div class="age">未读消息</div>
+        <div class="age">
+          <span>{{messes}}</span>
+          未读消息
+        </div>
       </router-link>
       <p class="creat">VUE2.0</p>
       <p class="creat">API</p>
@@ -50,6 +53,16 @@ export default {
     };
   },
   created() {
+    axios
+      .get(
+        `https://www.vue-js.com/api/v1/message/count?accesstoken=${sessionStorage.getItem(
+          "token"
+        )}`
+      )
+      .then(res => {
+        this.messes = res.data.data;
+        console.log(res.data);
+      });
     if (sessionStorage.getItem("token")) {
       axios
         .post("https://www.vue-js.com/api/v1/accesstoken", {
