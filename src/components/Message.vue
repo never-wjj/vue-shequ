@@ -1,7 +1,8 @@
 <template>
-  <div class="mess" v-if="mess">
-    <div>
+  <div class="mess-warp" v-if="mess">
+    <div class="mess-not">
       <p>主页/新消息</p>
+      <hr />
       <ul v-if="mess.hasnot_read_messages.length">
         <li v-for="messes in mess.hasnot_read_messages" :key="messes.id">
           <p>
@@ -14,10 +15,11 @@
           </p>
         </li>
       </ul>
-      <p v-else>无未读消息</p>
+      <span v-else>无消息</span>
     </div>
-    <div>
+    <div class="mess-has">
       <p>过往消息</p>
+      <hr />
       <ul>
         <li v-for="mes in mess.has_read_messages" :key="mes.id">
           <p>
@@ -62,4 +64,15 @@ export default {
 };
 </script>
 <style>
+.mess-not ul,
+.mess-has ul {
+  padding: 5px;
+}
+.mess-not ul li,
+.mess-has ul li {
+  border-bottom: 1px solid #ccc;
+}
+.mess-warp p {
+  margin: 6px;
+}
 </style>

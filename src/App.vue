@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="warp">
     <Header />
     <div class="inner">
       <router-view></router-view>
@@ -24,6 +24,9 @@ export default {
 .warp {
   background-color: #ccc;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .inner {
   width: 80%;

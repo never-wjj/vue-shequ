@@ -7,11 +7,11 @@
       </router-link>
       <p class="creat">首页</p>
       <router-link :to="$public+'/topics/creat'" v-if="userInfo">
-        <div class="age">发布评论</div>
+        <div class="age">发布话题</div>
       </router-link>
       <p class="creat">微信公众号</p>
       <router-link :to="$public+'/my/messages'" v-if="userInfo">
-        <div class="age">
+        <div class="age" v-if="userInfo">
           <span>{{messes}}</span>
           未读消息
         </div>
@@ -21,14 +21,14 @@
       <p class="creat">关于</p>
       <p class="creat">设置</p>
       <div v-if="!userInfo" class="login">
-        <input type="text" v-model="text" />
+        <input class="text-input" type="text" v-model="text" />
 
-        <el-button type="warning" @click="login" round>登录</el-button>
+        <el-button class="button-input" type="warning" @click="login" round>登录</el-button>
       </div>
       <div v-else class="df-vue">
         <img :src="userInfo.avatar_url" alt />
 
-        <el-button type="warning" @click="logRome" round>退出</el-button>
+        <el-button type="warning" class="button-input" @click="logRome" round>退出</el-button>
       </div>
     </div>
   </div>
@@ -49,20 +49,25 @@ export default {
   data() {
     return {
       text: "125c72b1-2803-41cb-8c79-a5372aff04f3",
-      userInfo: null
+      userInfo: null,
+      messes: 0
     };
   },
   created() {
-    axios
-      .get(
-        `https://www.vue-js.com/api/v1/message/count?accesstoken=${sessionStorage.getItem(
-          "token"
-        )}`
-      )
-      .then(res => {
-        this.messes = res.data.data;
-        console.log(res.data);
-      });
+    console.log(`${this.$public}`);
+    console.log(this.$route.fullPath);
+    if (sessionStorage.getItem("token")) {
+      axios
+        .get(
+          `https://www.vue-js.com/api/v1/message/count?accesstoken=${sessionStorage.getItem(
+            "token"
+          )}`
+        )
+        .then(res => {
+          this.messes = res.data.data;
+          console.log(res.data);
+        });
+    }
     if (sessionStorage.getItem("token")) {
       axios
         .post("https://www.vue-js.com/api/v1/accesstoken", {
@@ -76,6 +81,7 @@ export default {
   },
   methods: {
     login() {
+      this.$router.push(`${this.$public}`);
       axios
         .post("https://www.vue-js.com/api/v1/accesstoken", {
           accesstoken: this.text
@@ -87,6 +93,7 @@ export default {
         });
     },
     logRome() {
+      this.$router.push(`${this.$public}`);
       this.userInfo = null;
       sessionStorage.clear();
     }
@@ -130,5 +137,24 @@ export default {
   display: flex;
   align-items: center;
   padding: 6px 0;
+}
+.text-input {
+  padding: 3px 5px 3px 5px;
+  color: #666;
+  border: 0;
+  margin-top: 2px;
+  transition: all 0.5s;
+
+  margin-bottom: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+.el-button.is-round {
+  padding: 6px 10px;
 }
 </style>

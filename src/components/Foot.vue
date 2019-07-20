@@ -26,8 +26,12 @@ export default {
 
 <style>
 footer {
-  margin-top: 30px;
   background-color: #fff;
+  margin-top: 20px;
+  /* position: fixed;
+  width: 100vw;
+  bottom: 0;
+  left: 0; */
 }
 .foot-inner {
   padding-top: 15px;
