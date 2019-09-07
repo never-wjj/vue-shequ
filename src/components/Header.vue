@@ -55,7 +55,7 @@ export default {
   },
   created() {
     console.log(`${this.$public}`);
-    console.log(this.$route.fullPath);
+    console.log(userInfo);
     if (sessionStorage.getItem("token")) {
       axios
         .get(
